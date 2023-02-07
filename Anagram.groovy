@@ -3,16 +3,23 @@
 * anagram set: the subset of the candidates that are anagrams of the target.
 */
 
-class Ana {
+class Anagram {
     ArrayList<String> getAnagram(String target, ArrayList<String> candidates) {
+        String targetSorted = target.toLowerCase().split('').sort().join("")
         ArrayList<String> subset = []
+        ArrayList<String> sorted = candidates.collect {
+            it.toLowerCase().split('').sort().join("")
+        }
 
-        for (element in candidates) {
-            if (target.equalsIgnoreCase(element) || target.length() != element.length())
+
+        for (int x = 0; x < candidates.size(); x++) {
+            if (target == candidates[x])
                 continue
-
-            else
-                subset << element
+                
+            else {
+                if (targetSorted == sorted[x])
+                    subset << candidates[x]
+            }
         }
 
         subset
@@ -20,8 +27,7 @@ class Ana {
 }
 
 String target = "stone"
-ArrayList<String> candidates = ["stone", "tones", "banana",
-                                "tons", "notes", "Seton"]
+ArrayList<String>  candidates = ["stone", "tones", "banana", "tons", "alpha", "notes", "Seton"]
 
-def a = new Ana()
+def a = new Anagram()
 println (a.getAnagram(target, candidates))
